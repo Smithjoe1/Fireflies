@@ -6,7 +6,7 @@ Fireflies::Fireflies(){};
 
 const byte* Fireflies::getValues(int specie, int sex){
   if (sex == 0){return species[specie].flash_values_male;}
-  else if (sizeof(species[specie].flash_values_female) > 2){
+  else if (species[specie].flash_length_female = 0){
     return species[specie].flash_values_female;
   }else{
     return species[specie].flash_values_male;
@@ -15,7 +15,7 @@ const byte* Fireflies::getValues(int specie, int sex){
 
 int  Fireflies::getFlashLength(int specie, int sex){
   if (sex == 0){return species[specie].flash_length_male;}
-  else if (sizeof(species[specie].flash_length_female) > 2){
+  else if (species[specie].flash_length_female = 0){
     return species[specie].flash_length_female;
   }else{
     return species[specie].flash_length_male;
@@ -24,7 +24,7 @@ int  Fireflies::getFlashLength(int specie, int sex){
 
 int Fireflies::getFlashInterval(int specie, int sex){
   if (sex == 0){return species[specie].flash_interval_male;}
-  else if (sizeof(species[specie].flash_interval_female) > 2){
+  else if (species[specie].flash_length_female = 0){
     return species[specie].flash_interval_female;
   }else{
     return species[specie].flash_interval_male;
