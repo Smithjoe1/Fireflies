@@ -17,6 +17,7 @@ const int  TICK_INTERVAL     = 5;   // this is milliseconds, btw
 int similarMax = 20;
 int similarDist;  //number of millis for each start to be considered a similar ping, we init this based on the length of the interval from below
 int shiftDist;    //How far the random bound is in adjusting how close each LED sync is
+int lightOffset = 2;
 
 Firefly firefly[NUMBER_OF_LIGHTS];
 Fireflies fireflies;
@@ -36,14 +37,17 @@ void setup() {
   Serial.println(NUMBER_OF_LIGHTS);
   //  initializeLights();
    fireflies.printSpeciesList();
-   firefly[0].setupFireflies(fireflies);
+   fireflies.setupFireflies();
   for(int i=0; i < NUMBER_OF_LIGHTS; i++){
     
-    firefly[i].setFirefly(1,0,i);
-        firefly[i].setTimer(random(500));
-
+    firefly[i].setFirefly(random(fireflies.getNumberOfSpecies()),0,i+lightOffset);
+    firefly[i].setTimer(random(500));
+    firefly[i].setTimer(0);
     Serial.println(firefly[i].getNameofSpecies());
-
+//    for(int j=0; j< firefly[i].flash_length; j++){
+//       Serial.print(firefly[i].flash_values[j]); 
+//    }
+    Serial.println();
   }
   fireflies.printSpeciesList();
 }
@@ -65,15 +69,17 @@ void setLight(byte light, byte value){
 // the flash state (end of digitized flash), it moves to the interval phase (off).
 // There is some minor (50 ms) randomness introduced at the start of the
 void tickFlies() {
-  for (byte i=0; i < NUMBER_OF_LIGHTS; i++) {  
-    firefly[i].update();
-    setLight(i,firefly[i].getBrightness());
-    
-//    Serial.print("Light :");
-//    Serial.print(i);
-//    Serial.print(" Brightness ");
-//    Serial.println(firefly[i].getBrightness());
-  }
+   for (byte i=0; i < NUMBER_OF_LIGHTS; i++) { 
+          firefly[i].update();
+          setLight(firefly[i].getPin(),firefly[i].getBrightness());
+          
+//          Serial.print("L :");
+//          Serial.print(firefly[i].getPin());
+//          Serial.print(" B ");
+//          Serial.print(firefly[i].getBrightness());
+//          Serial.print(" LC :");
+//          Serial.println(firefly[i].loopCounter);
+        }
 }
 
 
@@ -96,6 +102,7 @@ void loop() {
     lastTime = now;
     while (delta >= 1){
       //Slow logic happens here
+     
 //     / Serial.println("Soemthing");
      delta--; 
     }
