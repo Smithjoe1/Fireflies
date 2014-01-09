@@ -51,7 +51,7 @@ void Firefly::update(){
         if(loopCounter >= flashInterval) {
             state = ON;
           }
-        if(state = ON) {
+        if(state == ON) {
            loopCounter = 0; 
         }else{
           loopCounter++;
