@@ -1,67 +1,102 @@
-
-// The following are basically a digitization of the shape and duration of the flash based on the Barber, 1951 
-// publication and a tick interval of 10 milliseconds (thus, a hundred values = one second). Unfortunately, 
-// Barber, 1951, makes no distinction between sexes, so a single 0 value in the female arrays tells the program
-// to use only the male flash pattern.
-#ifndef Firefly_H
-#define Firefly_H
-#include "Arduino.h"
-#include "Fireflies.h"
-
-class Firefly {
-  private:
+#include "Firefly.h"
+   
   
-
-    
-    typedef enum {MALE, FEMALE, BOTH} sexType;
-    sexType sexes; 
+boolean debug = true;
   
-    // This struct will maintain the stateful data for each light
-  //
- public:
-    
-  typedef enum {OFF, ON} flashState;
+byte Firefly::PERCENTAGE_MALES  = 75;
   
-    
-  Firefly();
-  void setFirefly(int specie, int sex, int light);
-  void setupFireflies(Fireflies f);
-  
-  boolean debug;
-  //Controls
-  void initializeLights();
-  void switchState();
-  void off();
-  void on();
-  void setTimer(int time);
-  void update();
-  
-  //Return values
-  int getNumberofSpecies();
-  String getNameofSpecies();
-  
-  flashState getState();
-  
-  byte getBrightness();
-  
-  Fireflies fireflies;
-  static byte PERCENTAGE_MALES;// used to set male-to-female ratios where both sex flashes are defined
-    //Which species do we use?
-    int specie;
-    int similarDist;
-    
-    const byte* flash_values;
-    int flash_length;
-    int flash_interval;
-    byte brightness;
-    int pin;                
-    flashState state;           // current state: ON means in a flash cycle; OFF means in the interval between flashes
-    int loopCounter;            // where in the flash cycle or interval we are
-    sexType sex;
-    int flashLength;             //How long the cycle will last for, to prevent unnessacary lookups which are happening everywhere at the moment.
-    int flashInterval;
-    int shiftDist;
-    int similarCount; //How many flashes has the led been in a pair for?
-  
+Firefly::Firefly(){  
 };
-#endif
+
+void Firefly::setupFireflies(Fireflies *f){
+ 
+}
+  
+void Firefly::setFirefly(int species, int sex, int light){
+   
+//   fireflies.printSpeciesList();
+  Serial.println("We've updated a firefly");
+  specie = species;//random(Fireflies::NUMBER_OF_SPECIES);
+  
+  flash_values = fireflies->getValues(species, sex);
+  
+  flash_length = fireflies->getFlashLength(species, sex);
+
+  flash_interval = fireflies->getFlashInterval(species, sex);
+    
+  Serial.print("FlashInterval ");
+  Serial.println(flash_interval);
+   Serial.print("FlashLength ");
+  Serial.println(flash_length);
+  
+  pin = light;
+  int similarDist= flash_interval/4;
+  state = true;
+  Serial.print("Specie ");
+  Serial.println(species);
+  Serial.print("Sex ");
+  Serial.println(sex);
+  Serial.print("Light ");
+  Serial.println(light);
+  Serial.println(fireflies->getNameofSpecies(species));
+}
+  
+  
+int Firefly::getNumberofSpecies(){
+  return fireflies-> getNumberOfSpecies();
+};
+
+String Firefly::getNameofSpecies(){
+  return fireflies-> getNameofSpecies(specie);
+};
+
+boolean Firefly::getState(){
+  return state;
+};
+  
+void Firefly::setTimer(int time){
+  loopCounter = time;
+};
+
+byte Firefly::getBrightness(){
+  return brightness;
+};
+
+int Firefly::getPin(){
+  return pin;
+}
+
+
+//This is the main logic update loop ------------------------------------------
+void Firefly::update(){
+  switch (getState()) {
+
+        case false:
+        if(loopCounter >= flash_interval) {
+            state = true;
+            loopCounter = 0;   
+        }else{
+          loopCounter++;
+        }
+        break;
+      
+      case true:
+       //Have we run over the flash length?
+        if(loopCounter >= flash_length) {
+          state = false;
+          //Lets loop the counter
+          loopCounter -= flash_length;
+        }
+        //If the light is on, flash
+        if(state == true) {
+          loopCounter++;
+          brightness = flash_values[loopCounter];
+
+          //  setLight(lights[i].light, flash_values);
+
+        } else {
+          
+        }
+      break;
+  }
+};
