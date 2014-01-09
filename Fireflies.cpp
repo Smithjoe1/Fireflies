@@ -1,6 +1,6 @@
 #include "Fireflies.h"
 
-//This is if we cast the array as static so we can talk to it from here.
+
 //Fireflies::Specie Fireflies::species[];
 
 Fireflies::Fireflies(){
@@ -15,6 +15,7 @@ Fireflies::Fireflies(){
 
 
 void Fireflies::createData(){
+//  Fireflies f;
     Specie speciesA[NUMBER_OF_SPECIES] = {
     { "Photuris ludicrecens",   Fireflies::Photuris_ludicrecens_male,    199, 545, Fireflies::Photuris_ludicrecens_female,     0, 0    },
     { "Photuris pennsylvanica", Fireflies::Photuris_pennsylvanica_male,  259, 465, Fireflies::Photuris_pennsylvanica_female,   0, 0    },
@@ -30,8 +31,8 @@ void Fireflies::createData(){
 // memcpy(Fireflies::species, speciesA, NUMBER_OF_SPECIES);
  for(int i=0;i< NUMBER_OF_SPECIES;i++){
    Fireflies::species[i] = speciesA[i];
-//    Serial.println(speciesA[i].name);
-//    Serial.println(Fireflies::species[i].name);
+    Serial.println(speciesA[i].name);
+    Serial.println(Fireflies::species[i].name);//f.species dosen't work, 
  };
 };
 
