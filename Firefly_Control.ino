@@ -35,7 +35,7 @@ void setup() {
   
   Serial.println(NUMBER_OF_LIGHTS);
   //  initializeLights();
-  for(int i=0; i<= NUMBER_OF_LIGHTS; i++){
+  for(int i=0; i< NUMBER_OF_LIGHTS; i++){
     
     firefly[i].setFirefly(1,0,i);
 //        firefly[i].setTimer(random(500));
