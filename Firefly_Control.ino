@@ -36,6 +36,7 @@ void setup() {
   Serial.println(NUMBER_OF_LIGHTS);
   //  initializeLights();
    fireflies.printSpeciesList();
+   firefly[0].setupFireflies(fireflies);
   for(int i=0; i < NUMBER_OF_LIGHTS; i++){
     
     firefly[i].setFirefly(1,0,i);
