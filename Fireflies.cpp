@@ -1,7 +1,7 @@
 #include "Fireflies.h"
 
 
-//Fireflies::Specie Fireflies::species[];
+Fireflies::Specie Fireflies::species[];
 
 Fireflies::Fireflies(){
 //  Specie species[NUMBER_OF_SPECIES];
@@ -12,6 +12,11 @@ Fireflies::Fireflies(){
 // f.species == speciesA;
 // f.species[] = 
 };
+
+  void Fireflies::setupFireflies(){
+     createData();
+  };
+
 
 
 void Fireflies::createData(){
@@ -31,7 +36,7 @@ void Fireflies::createData(){
 // memcpy(Fireflies::species, speciesA, NUMBER_OF_SPECIES);
  for(int i=0;i< NUMBER_OF_SPECIES;i++){
    Fireflies::species[i] = speciesA[i];
-    Serial.println(speciesA[i].name);
+//    Serial.println(speciesA[i].name);
     Serial.println(Fireflies::species[i].name);//f.species dosen't work, 
  };
 };
@@ -46,8 +51,9 @@ const byte* Fireflies::getValues(int specie, int sex){
 };
 
 int  Fireflies::getFlashLength(int specie, int sex){
-  if (sex == 0){return species[specie].flash_length_male;}
-  else if (species[specie].flash_length_female == 0){
+  if (sex == 0){
+  return species[specie].flash_length_male;
+} else if (species[specie].flash_length_female == 0){
     return species[specie].flash_length_female;
   }else{
     return species[specie].flash_length_male;
@@ -55,8 +61,9 @@ int  Fireflies::getFlashLength(int specie, int sex){
 };
 
 int Fireflies::getFlashInterval(int specie, int sex){
-  if (sex == 0){return species[specie].flash_interval_male;}
-  else if (species[specie].flash_length_female = 0){
+  if (sex == 0){
+    return species[specie].flash_interval_male;
+  }else if (species[specie].flash_length_female = 0){
     return species[specie].flash_interval_female;
   }else{
     return species[specie].flash_interval_male;
