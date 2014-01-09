@@ -18,8 +18,9 @@ class Fireflies {
   void createData();
   
   const byte* getValues(int specie, int sex);
+  void setupFireflies();
   
-  int  getFlashLength(int specie, int sex);
+  int getFlashLength(int specie, int sex);
   int getFlashInterval(int specie, int sex);
   int getNumberOfSpecies();
   String getNameofSpecies(int i);
@@ -65,7 +66,7 @@ class Fireflies {
   // add any new species, the NUMBER_OF_SPECIES values at the top, needs to reflect that.
   // 
 //  vector<Specie> species;
-   Specie species[NUMBER_OF_SPECIES];
+  static Specie species[NUMBER_OF_SPECIES];
   private:
   
 };
