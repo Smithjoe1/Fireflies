@@ -20,12 +20,11 @@ class Firefly {
   //
  public:
     
-  typedef enum {OFF, ON} flashState;
   
     
   Firefly();
   void setFirefly(int specie, int sex, int light);
-  
+  void setupFireflies(Fireflies *f);
   
   boolean debug;
   //Controls
@@ -39,12 +38,13 @@ class Firefly {
   //Return values
   int getNumberofSpecies();
   String getNameofSpecies();
+  int getPin();
   
-  flashState getState();
+  boolean getState();
   
   byte getBrightness();
   
-  Fireflies fireflies;
+  Fireflies* fireflies;
   static byte PERCENTAGE_MALES;// used to set male-to-female ratios where both sex flashes are defined
     //Which species do we use?
     int specie;
@@ -55,11 +55,9 @@ class Firefly {
     int flash_interval;
     byte brightness;
     int pin;                
-    flashState state;           // current state: ON means in a flash cycle; OFF means in the interval between flashes
+    boolean state;           // current state: ON means in a flash cycle; OFF means in the interval between flashes
     int loopCounter;            // where in the flash cycle or interval we are
     sexType sex;
-    int flashLength;             //How long the cycle will last for, to prevent unnessacary lookups which are happening everywhere at the moment.
-    int flashInterval;
     int shiftDist;
     int similarCount; //How many flashes has the led been in a pair for?
   
