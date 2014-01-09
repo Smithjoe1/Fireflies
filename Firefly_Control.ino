@@ -42,9 +42,9 @@ void setup() {
         firefly[i].setTimer(random(500));
 
     Serial.println(firefly[i].getNameofSpecies());
-fireflies.printSpeciesList();
+
   }
-  
+  fireflies.printSpeciesList();
 }
 
 // This just sets the light (pin) to a given PWM value
