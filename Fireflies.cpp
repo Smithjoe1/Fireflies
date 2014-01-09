@@ -1,12 +1,43 @@
 #include "Fireflies.h"
 
-static int NUMBER_OF_SPECIES = 9;
+//This is if we cast the array as static so we can talk to it from here.
+//Fireflies::Specie Fireflies::species[];
 
-Fireflies::Fireflies(){};
+Fireflies::Fireflies(){
+//  Specie species[NUMBER_OF_SPECIES];
+//Fireflies f();
+  
+//    f.species[] =
+//// 
+// f.species == speciesA;
+// f.species[] = 
+};
+
+
+void Fireflies::createData(){
+    Specie speciesA[NUMBER_OF_SPECIES] = {
+    { "Photuris ludicrecens",   Fireflies::Photuris_ludicrecens_male,    199, 545, Fireflies::Photuris_ludicrecens_female,     0, 0    },
+    { "Photuris pennsylvanica", Fireflies::Photuris_pennsylvanica_male,  259, 465, Fireflies::Photuris_pennsylvanica_female,   0, 0    },
+    { "Photuris versicolor",    Fireflies::Photuris_versicolor_male,     116, 425, Fireflies::Photuris_versicolor_female,      0, 0    },
+    { "Photuris quadrifulgens", Fireflies::Photuris_quadrifulgens_male,   74, 450, Fireflies::Photuris_quadrifulgens_female,   0, 0    },
+    { "Photuris pyralomima",    Fireflies::Photuris_pyralomima_male,      53, 450, Fireflies::Photuris_pyralomima_female,      0, 0    },
+    { "Photuris tremulans",     Fireflies::Photuris_tremulans_male,       95, 640, Fireflies::Photuris_tremulans_female,       0, 0    },
+    { "Photuris aureolucens",   Fireflies::Photuris_aureolucens_male,     10, 385, Fireflies::Photuris_aureolucens_female,     0, 0    },
+    { "Photuris hebes",         Fireflies::Photuris_aureolucens_male,     10, 180, Fireflies::Photuris_aureolucens_female,     0, 0    },
+    { "Photuris frontalis",     Fireflies::Photuris_frontalis_male,       10,  90, Fireflies::Photuris_frontalis_female,       0, 0    },
+    { "Photinis brimleyi",      Fireflies::Photuris_frontalis_male,       10, 100, Fireflies::Photinus_brimleyi_female,      146, 1000 },
+ }; 
+// memcpy(Fireflies::species, speciesA, NUMBER_OF_SPECIES);
+ for(int i=0;i< NUMBER_OF_SPECIES;i++){
+   Fireflies::species[i] = speciesA[i];
+//    Serial.println(speciesA[i].name);
+//    Serial.println(Fireflies::species[i].name);
+ };
+};
 
 const byte* Fireflies::getValues(int specie, int sex){
   if (sex == 0){return species[specie].flash_values_male;}
-  else if (species[specie].flash_length_female = 0){
+  else if (species[specie].flash_length_female == 0){
     return species[specie].flash_values_female;
   }else{
     return species[specie].flash_values_male;
@@ -15,7 +46,7 @@ const byte* Fireflies::getValues(int specie, int sex){
 
 int  Fireflies::getFlashLength(int specie, int sex){
   if (sex == 0){return species[specie].flash_length_male;}
-  else if (species[specie].flash_length_female = 0){
+  else if (species[specie].flash_length_female == 0){
     return species[specie].flash_length_female;
   }else{
     return species[specie].flash_length_male;
@@ -39,6 +70,11 @@ int Fireflies::getNumberOfSpecies(){
      return species[i].name;
   };
 
+void Fireflies::printSpeciesList(){
+ for(int i=0;i< NUMBER_OF_SPECIES;i++){
+    Serial.println(Fireflies::species[i].name);
+ }
+}
 
 
 const byte Fireflies::Photuris_ludicrecens_male[] = {1,3,4,6,7,8,10,11,12,14,
@@ -120,16 +156,5 @@ const byte Fireflies::Photuris_ludicrecens_male[] = {1,3,4,6,7,8,10,11,12,14,
     100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
     100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
     100,100,100,100,100,100,100,100,75,50,25};
-
-Fireflies::Specie species[] = {
-  { "Photuris ludicrecens",   Fireflies::Photuris_ludicrecens_male,    199, 545, Fireflies::Photuris_ludicrecens_female,     0, 0    },
-  { "Photuris pennsylvanica", Fireflies::Photuris_pennsylvanica_male,  259, 465, Fireflies::Photuris_pennsylvanica_female,   0, 0    },
-  { "Photuris versicolor",    Fireflies::Photuris_versicolor_male,     116, 425, Fireflies::Photuris_versicolor_female,      0, 0    },
-  { "Photuris quadrifulgens", Fireflies::Photuris_quadrifulgens_male,   74, 450, Fireflies::Photuris_quadrifulgens_female,   0, 0    },
-  { "Photuris pyralomima",    Fireflies::Photuris_pyralomima_male,      53, 450, Fireflies::Photuris_pyralomima_female,      0, 0    },
-  { "Photuris tremulans",     Fireflies::Photuris_tremulans_male,       95, 640, Fireflies::Photuris_tremulans_female,       0, 0    },
-  { "Photuris aureolucens",   Fireflies::Photuris_aureolucens_male,     10, 385, Fireflies::Photuris_aureolucens_female,     0, 0    },
-  { "Photuris hebes",         Fireflies::Photuris_aureolucens_male,     10, 180, Fireflies::Photuris_aureolucens_female,     0, 0    },
-  { "Photuris frontalis",     Fireflies::Photuris_frontalis_male,       10,  90, Fireflies::Photuris_frontalis_female,       0, 0    },
-  { "Photinis brimleyi",      Fireflies::Photuris_frontalis_male,       10, 100, Fireflies::Photinus_brimleyi_female,      146, 1000 },
-};
+    
+  
