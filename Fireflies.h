@@ -10,7 +10,12 @@
 
 class Fireflies {
   public:  
+  #define NUMBER_OF_SPECIES 10 
+
   Fireflies();
+  Fireflies f();
+  
+  void createData();
   
   const byte* getValues(int specie, int sex);
   
@@ -18,7 +23,8 @@ class Fireflies {
   int getFlashInterval(int specie, int sex);
   int getNumberOfSpecies();
   String getNameofSpecies(int i);
-
+  void printSpeciesList();
+  
   
   static const byte Photuris_ludicrecens_male[199];
   static const byte Photuris_ludicrecens_female[1];
@@ -58,7 +64,8 @@ class Fireflies {
   // Each species is defined, primarily to set the length of the arrays above and the intervals for timing. If you
   // add any new species, the NUMBER_OF_SPECIES values at the top, needs to reflect that.
   // 
-  Specie species[];
+//  vector<Specie> species;
+   Specie species[NUMBER_OF_SPECIES];
   private:
   
 };
