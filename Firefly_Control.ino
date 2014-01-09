@@ -10,7 +10,7 @@
 #include "Firefly.h"
 #include "Fireflies.h"
 
-#define NUMBER_OF_LIGHTS 11 // number of lights we are using
+#define NUMBER_OF_LIGHTS 12 // number of lights we are using
 
 
 const int  TICK_INTERVAL     = 5;   // this is milliseconds, btw
@@ -35,13 +35,14 @@ void setup() {
   
   Serial.println(NUMBER_OF_LIGHTS);
   //  initializeLights();
-  for(int i=0; i< NUMBER_OF_LIGHTS; i++){
+   fireflies.printSpeciesList();
+  for(int i=0; i < NUMBER_OF_LIGHTS; i++){
     
     firefly[i].setFirefly(1,0,i);
-//        firefly[i].setTimer(random(500));
+        firefly[i].setTimer(random(500));
 
-//    Serial.println(firefly[i].getNameofSpecies());
-
+    Serial.println(firefly[i].getNameofSpecies());
+fireflies.printSpeciesList();
   }
   
 }
@@ -63,14 +64,14 @@ void setLight(byte light, byte value){
 // the flash state (end of digitized flash), it moves to the interval phase (off).
 // There is some minor (50 ms) randomness introduced at the start of the
 void tickFlies() {
-  for (byte i=0; i<NUMBER_OF_LIGHTS; i++) {  
+  for (byte i=0; i < NUMBER_OF_LIGHTS; i++) {  
     firefly[i].update();
     setLight(i,firefly[i].getBrightness());
     
-    Serial.print("Light :");
-    Serial.print(i);
-    Serial.print(" Brightness ");
-    Serial.println(firefly[i].getBrightness());
+//    Serial.print("Light :");
+//    Serial.print(i);
+//    Serial.print(" Brightness ");
+//    Serial.println(firefly[i].getBrightness());
   }
 }
 
@@ -94,7 +95,7 @@ void loop() {
     lastTime = now;
     while (delta >= 1){
       //Slow logic happens here
-      Serial.println("Soemthing");
+//     / Serial.println("Soemthing");
      delta--; 
     }
     //Runs every cycle happens here
