@@ -1,3 +1,4 @@
+
 // The following are basically a digitization of the shape and duration of the flash based on the Barber, 1951 
 // publication and a tick interval of 10 milliseconds (thus, a hundred values = one second). Unfortunately, 
 // Barber, 1951, makes no distinction between sexes, so a single 0 value in the female arrays tells the program
@@ -12,7 +13,7 @@ class Fireflies {
   #define NUMBER_OF_SPECIES 10 
 
   Fireflies();
- // Fireflies f();
+
   
   void createData();
   
