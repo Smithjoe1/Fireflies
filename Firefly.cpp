@@ -7,9 +7,12 @@ byte Firefly::PERCENTAGE_MALES  = 75;
   
 Firefly::Firefly(){  
 };
+
   
   
 void Firefly::setFirefly(int species, int sex, int light){
+   fireflies.createData();
+//   fireflies.printSpeciesList();
   specie = species;//random(Fireflies::NUMBER_OF_SPECIES);
   
   flash_values = fireflies.getValues(species, sex);
@@ -22,6 +25,7 @@ void Firefly::setFirefly(int species, int sex, int light){
   Serial.println(species);
   Serial.println(sex);
   Serial.println(light);
+//  Serial.println(fireflies.getNameofSpecies(species));
 }
   
   
